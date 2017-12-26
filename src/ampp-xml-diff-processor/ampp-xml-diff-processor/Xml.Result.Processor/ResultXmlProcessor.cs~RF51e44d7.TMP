@@ -1,0 +1,286 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+using Xml.Diff.Creation.CommonConstant;
+
+namespace Xml.Result.Processor
+{
+    public class ResultXmlProcessor
+    {
+      public ResultXmlProcessor()
+      {
+          
+      }
+      public XDocument ChangeAttrNode(XDocument diffXDoc,XDocument resultXDoc)//Done
+      {
+        diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + CommonConstant.CHANGE).Where(s => s.Attribute(CommonConstant.NAME) != null).ToList()
+          .ForEach(item =>
+            {
+              string nodeposiiton = item.Attribute(CommonConstant.MATCH).Value;
+              nodeposiiton = nodeposiiton.Split(CommonConstant.FORWARD_SLASH)[nodeposiiton.Split(CommonConstant.FORWARD_SLASH).Length - 1];
+              if (nodeposiiton.All(Char.IsDigit))
+              {
+
+                string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+                XNode nd = GetActualNd(parentposition, item,resultXDoc);
+
+                XElement valnode = null;
+                if (nd.NodeType == XmlNodeType.Element)
+                  valnode = (XElement)nd;
+                XNode requiredNd = valnode.Nodes().ToList()[Convert.ToInt32(nodeposiiton) - 1];
+                XElement mainnode = null;
+                if (requiredNd.NodeType == XmlNodeType.Element)
+                  mainnode = (XElement)requiredNd;
+
+                mainnode.Add(new XAttribute(CommonConstant.OLDNAME, mainnode.Name));
+                mainnode.Add(new XAttribute(CommonConstant.NEWNAME, item.Attribute(CommonConstant.NAME).Value));
+
+              }
+            }
+          );
+        return resultXDoc;
+      }
+      public XNode GetActualNd(string parentposition, XElement item,XDocument resultXDoc)//Done
+      {
+        XNode Nd = null;
+        if (parentposition.Contains(CommonConstant.FORWARD_SLASH) == false)
+        {
+          Nd = resultXDoc.Descendants().Where(s => s.Attribute(CommonConstant.CS_CRESTID).Value == parentposition).First();
+        }
+        else
+        {
+          int counter = Convert.ToInt32(parentposition.Split('/').Length) - 1;
+          for (int p = 0; p <= Convert.ToInt32(counter); p++)
+          {
+            if (p == 0)
+              Nd = resultXDoc.Descendants().Where(s => s.Attribute(CommonConstant.CS_CRESTID).Value == parentposition.Split(CommonConstant.FORWARD_SLASH)[p]).FirstOrDefault();
+            else
+              Nd = (resultXDoc.Descendants().Where(s => s.Attribute(CommonConstant.CS_CRESTID) != null && s.Attribute(CommonConstant.CS_CRESTID).Value == parentposition.Split(CommonConstant.FORWARD_SLASH)[p].ToString()).FirstOrDefault());
+          }
+
+        }
+        return Nd;
+      }
+    public XDocument ChangeNodeText(XDocument diffXDoc,XDocument resultXDoc)//Done
+    {
+      diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + CommonConstant.CHANGE).Where(s => s.Attribute(CommonConstant.MATCH) != null && s.Attribute(CommonConstant.NAME) == null).ToList()
+          .ForEach(item =>
+          {
+            string nodeposiiton = item.Attribute(CommonConstant.MATCH).Value;
+            nodeposiiton = nodeposiiton.Split(CommonConstant.FORWARD_SLASH)[nodeposiiton.Split(CommonConstant.FORWARD_SLASH).Length - 1];
+            if (nodeposiiton.All(Char.IsDigit))
+            {
+              string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+              XNode nd = GetActualNd(parentposition, item,resultXDoc);
+              XElement valnode = null;
+              if (nd.NodeType == XmlNodeType.Element)
+                valnode = (XElement)nd;
+              XNode requiredNd = valnode.Nodes().ToList()[Convert.ToInt32(nodeposiiton) - 1];
+              if (requiredNd.NodeType == XmlNodeType.Text)
+              {
+                XElement element = new XElement(CommonConstant.TEXTCHANGED, new XElement(CommonConstant.DEL, requiredNd), new XElement("ins", item.Value));
+                valnode.Nodes().ToList()[Convert.ToInt32(nodeposiiton) - 1].ReplaceWith(element);
+              }
+            }
+            else
+            {
+              if (item.Attribute(CommonConstant.MATCH).Value.Contains(CommonConstant.AT_SIGN) == true)
+              {
+                string atrname = item.Attribute(CommonConstant.MATCH).Value.Replace(CommonConstant.AT_SIGN, "");
+                string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+                XNode nd = GetActualNd(parentposition, item,resultXDoc);
+                if (nd != null)
+                {
+                  XElement valnode = null;
+                  if (nd.NodeType == XmlNodeType.Element)
+                    valnode = (XElement)nd;
+                  valnode.Add(new XAttribute("oldattr_" + atrname, valnode.Attribute(atrname).Value));
+                  valnode.SetAttributeValue(atrname, item.Value);
+
+                }
+              }
+            }
+          });
+      return resultXDoc;
+    }
+      public XDocument DeleteNode(XDocument diffXDoc,XDocument resultXDoc)//Done
+      {
+        diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + CommonConstant.REMOVE).Where(s => s.Attribute(CommonConstant.MATCH) != null && s.Attribute(CommonConstant.OPID) == null).ToList()
+          .ForEach(item =>
+          {
+            string nodeposiiton = item.Attribute(CommonConstant.MATCH).Value;
+            if (nodeposiiton.Contains(CommonConstant.AT_SIGN) == true)
+            {
+              //delete attr 
+              string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+              XNode nd = GetActualNd(parentposition, item,resultXDoc);
+              (nd as XElement).Add(new XAttribute("removeattr_" + (nd as XElement).Attribute(nodeposiiton.Replace(CommonConstant.AT_SIGN, "")).Name, (nd as XElement).Attribute(nodeposiiton.Replace(CommonConstant.AT_SIGN, "")).Value));
+              (nd as XElement).Attribute((nd as XElement).Attribute(nodeposiiton.Replace(CommonConstant.AT_SIGN, "")).Name).Remove();
+            }
+            else
+            {
+              //delete node
+              string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+              XNode nd = GetActualNd(parentposition, item,resultXDoc);
+              XElement requiredNd = (XElement)(nd as XElement).Nodes().ToList()[Convert.ToInt32(nodeposiiton) - 1];
+              requiredNd.Add(new XAttribute(CommonConstant.DELETED, CommonConstant.TRUE));
+            }
+          });
+        return resultXDoc;
+      }
+      public XDocument MovedNodeAtr(XDocument diffXDoc,XDocument resultXDoc)//Done
+      {
+        diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + CommonConstant.REMOVE).Where(s => s.Attribute("match") != null && s.Attribute(CommonConstant.OPID) != null).ToList()
+          .ForEach(item =>
+          {
+            string nodeposiiton = item.Attribute(CommonConstant.MATCH).Value;
+            string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+            XNode nd = GetActualNd(parentposition, item,resultXDoc);
+            XElement requiredNd = (XElement)(nd as XElement).Nodes().ToList()[Convert.ToInt32(nodeposiiton) - 1];
+            requiredNd.Add(new XAttribute(CommonConstant.MOVED, CommonConstant.TRUE), new XAttribute(CommonConstant.DELETED, CommonConstant.TRUE), new XAttribute(CommonConstant.MOVEDPOS, item.Attribute(CommonConstant.OPID).Value));
+            diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + "descriptor").Single(p => p.Attribute(CommonConstant.OPID).Value == item.Attribute(CommonConstant.OPID).Value).Add(new XAttribute(CommonConstant.MOVEDPOS, item.Attribute(CommonConstant.OPID).Value));
+          });
+        return resultXDoc;
+      }
+      public XDocument AddNodeattr(XDocument diffXDoc,XDocument resultXDoc)//Done
+      {
+        diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + CommonConstant.ADD).Where(s => s.Attribute(CommonConstant.TYPE) != null && s.Attribute(CommonConstant.TYPE).Value == "2" && s.Attribute(CommonConstant.PROCESSED) == null).ToList()
+          .ForEach(item =>
+          {
+
+            string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+            XElement nd = GetActualNd(parentposition, item,resultXDoc) as XElement;
+            nd.Add(new XAttribute("Addattrname_" + item.Attribute(CommonConstant.NAME).Value, item.Value));
+            item.Add(new XAttribute(CommonConstant.PROCESSED, CommonConstant.TRUE));
+          });
+        return resultXDoc;
+      }
+      public XDocument AddSingleNode(XDocument diffXDoc,XDocument resultXDoc)//Done
+      {
+        diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + CommonConstant.ADD).Where(s => s.Attribute(CommonConstant.TYPE) == null && s.Attribute(CommonConstant.OPID) == null && s.Attribute(CommonConstant.NAME) == null).ToList()
+          .ForEach(item =>
+          {
+            string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+            XElement nd = GetActualNd(parentposition, item,resultXDoc) as XElement;
+            nd.AddAfterSelf(new XElement(CommonConstant.ADDITION, item.Descendants().ToList()));
+            item.Add(new XAttribute(CommonConstant.PROCESSED, CommonConstant.TRUE));
+          });
+
+        diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + CommonConstant.ADD).Where(s => s.Attribute(CommonConstant.TYPE) != null && s.Attribute(CommonConstant.TYPE).Value == "1" && s.Attribute(CommonConstant.PROCESSED) == null).ToList()
+          .ForEach(item =>
+          {
+            if (item.Descendants(diffXDoc.Root.Name.Namespace + CommonConstant.ADD).ToList().Count > 0)
+            {
+              ProcessNode(item,diffXDoc,resultXDoc);
+            }
+            else
+            {
+              string parentposition = item.Attribute(CommonConstant.CS_PARENT).Value;
+              XElement nd = GetActualNd(parentposition, item,resultXDoc) as XElement;
+              nd.AddAfterSelf(new XElement(CommonConstant.ADDITION, new XElement(item.Attribute(CommonConstant.NAME).Value, "")));
+              item.Add(new XAttribute(CommonConstant.PROCESSED, CommonConstant.TRUE));
+            }
+
+          });
+        return resultXDoc;
+      }
+    public XDocument ProcessNode(XElement item,XDocument diffXDoc,XDocument resultXDoc)//Done
+    {
+      if (item.Attribute(CommonConstant.PROCESSED) == null)
+      {
+        XElement ele = new XElement(item.Attribute(CommonConstant.NAME).Value, "");
+        item.Add(new XAttribute(CommonConstant.PROCESSED, CommonConstant.TRUE));
+
+        item.Descendants(diffXDoc.Root.Name.Namespace + "add").ToList()
+          .ForEach(s =>
+          {
+                    //single node or moved node
+                    if (s.Attribute(CommonConstant.TYPE) != null && s.Attribute(CommonConstant.TYPE).Value == "1" && s.Attribute(CommonConstant.PROCESSED) == null && s.Attribute(CommonConstant.TYPE) != null)
+            {
+              if (ele.Descendants().Elements() != null)
+              {
+                if (ele.Elements().Count() > 0)
+                  ele.Elements().Last().Add(new XElement(s.Attribute(CommonConstant.NAME).Value), "");
+                else
+                  ele.Add(new XElement(s.Attribute(CommonConstant.NAME).Value), "");
+
+                s.Add(new XAttribute(CommonConstant.PROCESSED, CommonConstant.TRUE));
+              }
+              else
+              {
+                if (ele.Elements().Count() > 0)
+                  ele.Elements().Last().Add(new XElement(s.Attribute(CommonConstant.NAME).Value), "");
+                else
+                  ele.Add(new XElement(s.Attribute(CommonConstant.NAME).Value), "");
+                s.Add(new XAttribute(CommonConstant.PROCESSED, CommonConstant.TRUE));
+              }
+            }
+            else if (s.Attribute(CommonConstant.OPID).Value == "1")
+            {
+              var x = resultXDoc.Descendants().Where(a => a.Attribute(CommonConstant.MOVEDPOS) != null && a.Attribute(CommonConstant.MOVEDPOS).Value == s.Attribute(CommonConstant.OPID).Value.ToString()).FirstOrDefault();
+              if (ele.Elements().Count() > 0)
+                ele.Elements().Last().Add(x);
+              else
+                ele.Add(x);
+
+              s.Add(new XAttribute(CommonConstant.PROCESSED, CommonConstant.TRUE));
+            }
+          });
+        string parentposition = item.Attribute("cs_parent").Value;
+        XElement nd = GetActualNd(parentposition, item,resultXDoc) as XElement;
+        nd.AddAfterSelf(new XElement(CommonConstant.ADDITION, ele));
+      }
+      return resultXDoc;
+    }
+      private void AddMovedNode()
+      {
+
+      }
+      public XDocument RenameTag(XDocument resultXDoc)//Done
+      {
+        resultXDoc.Descendants().Where(s => s.Attribute(CommonConstant.OLDNAME) != null && s.Attribute(CommonConstant.NEWNAME) != null).ToList()
+          .ForEach(d =>
+            {
+              d.Add(new XAttribute("TagChanged", CommonConstant.TRUE));
+              d.Name = d.Attribute(CommonConstant.NEWNAME).Value;
+            }
+          );
+        return resultXDoc;
+      }
+      public XDocument DeleteAttr(string p,XDocument resultXDoc)
+      {
+        resultXDoc.Descendants().Where(s => s.Attribute(p) != null).ToList()
+          .ForEach(d =>
+            {
+              d.Attribute(p).Remove();
+            }
+          );
+        return resultXDoc;
+      }
+      private void RenameAddedNd()
+      {
+        //resultXDoc.Descendants().Elements(CommonConstant.ADDITION).ToList()
+        //  .ForEach(s => {
+        //      s.Remove();
+        //  });
+      }
+      public XDocument DeleteMovedNodeAtr(XDocument resultXDoc)//Done
+      {
+        resultXDoc.Descendants().Where(s => s.Attribute("Moved") != null && s.Attribute(CommonConstant.DELETED) != null && s.Attribute("Moved").Value == CommonConstant.TRUE && s.Attribute(CommonConstant.DELETED).Value == CommonConstant.TRUE).ToList()
+          .ForEach(d =>
+            {
+              d.Attribute(CommonConstant.DELETED).Remove();
+            }
+          );
+        return resultXDoc;
+      }
+      private void SaveResultXML(XDocument resultXDoc)
+      {
+        resultXDoc.Save(@"d:\SampleXML\result.xml");
+      }
+  }
+}
