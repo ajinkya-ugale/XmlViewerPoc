@@ -1,23 +1,24 @@
-﻿using System;
-using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
-using Xml.Diff.Creation.CommonConstant;
-using Xml.Diff.Creation.Utilities;
+﻿using System.Xml.Linq;
 
 namespace Xml.Result.Processor
 {
     public class ResultXmlProcessor
     {
       private XDocument _diffXDoc;
-      //public XDocument StartResultProcessing(XDocument diffXDoc, XDocument r c)
-      //{
-      //_diffXDoc =   diffXDoc;
+      private XDocument _resultXDoc;
+    public void StartResultProcessing(XDocument diffXDoc, XDocument resultXDoc)
+    {
+      ChangeFunctionality changeFunctionality=new ChangeFunctionality();
+      _resultXDoc = changeFunctionality.AddNodeAndAttributeInformation(diffXDoc, resultXDoc);
+      DeleteFunctionality deleteFunctionality=new DeleteFunctionality();
+      _resultXDoc = deleteFunctionality.AddMovedAndDeletedNodeAndAttributeInformation(diffXDoc, _resultXDoc);
+      AddFunctionality addFunctionality=new AddFunctionality();
+      _resultXDoc = addFunctionality.AddNodeAttributeAndNode(diffXDoc, _resultXDoc);
+      ModificationFunctionalitiy modificationFunctionalitiy=new ModificationFunctionalitiy();
+      SaveResultXML(modificationFunctionalitiy.ModifyResult(diffXDoc,_resultXDoc));
+    }
 
-      //  return resultXDoc;
-      //}
-     
-      private void SaveResultXML(XDocument resultXDoc)
+    private void SaveResultXML(XDocument resultXDoc)
       {
         resultXDoc.Save(@"d:\SampleXML\result.xml");
       }

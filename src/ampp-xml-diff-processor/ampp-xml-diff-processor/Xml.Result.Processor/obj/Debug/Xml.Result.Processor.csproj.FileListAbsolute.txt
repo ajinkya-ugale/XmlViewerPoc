@@ -20,3 +20,11 @@ D:\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\obj\Debu
 D:\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.csproj.CoreCompileInputs.cache
 D:\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.dll
 D:\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.pdb
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\bin\Debug\Xml.Result.Processor.dll
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\bin\Debug\Xml.Result.Processor.pdb
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\bin\Debug\Xml.Diff.Creation.dll
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\bin\Debug\Xml.Diff.Creation.pdb
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.csprojResolveAssemblyReference.cache
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.csproj.CoreCompileInputs.cache
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.dll
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.pdb

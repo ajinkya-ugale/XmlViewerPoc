@@ -12,8 +12,10 @@ namespace Xml.Result.Processor
     private XDocument _resultXDoc;
     public XDocument AddNodeAndAttributeInformation(XDocument diffXDoc, XDocument resultXDoc)
     {
-      
-      return _resultXDoc;
+      ChangeAttributeOfNode changeAttributeOfNode=new ChangeAttributeOfNode();
+      _resultXDoc = changeAttributeOfNode.ChangeAttrNode(diffXDoc, resultXDoc);
+      ChangeTheTextOfResultXml changeTheTextOfResultXml=new ChangeTheTextOfResultXml();
+      return changeTheTextOfResultXml.ChangeNodeText(diffXDoc,_resultXDoc);
     }
   }
 }

@@ -42,12 +42,15 @@
   <ItemGroup>
     <Compile Include="AddCrestId.cs" />
     <Compile Include="AddDeletedNodeAndAttributeInformationInResult.cs" />
+    <Compile Include="AddFunctionality.cs" />
     <Compile Include="AddMovedAttributeNodeInformationInResult.cs" />
     <Compile Include="AddNewAttributeAndAddedNewNodeInformationInResult.cs" />
     <Compile Include="ChangeAttributeOfNode.cs" />
     <Compile Include="ChangeFunctionality.cs" />
     <Compile Include="ChangeTheTextOfResultXml.cs" />
+    <Compile Include="DeleteFunctionality.cs" />
     <Compile Include="DeleteMovedAndDeletedAttributes.cs" />
+    <Compile Include="ModificationFunctionalitiy.cs" />
     <Compile Include="RenameTagValueInResult.cs" />
     <Compile Include="ResultXmlProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

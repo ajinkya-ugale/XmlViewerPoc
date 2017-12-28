@@ -23,6 +23,7 @@ namespace Xml.Result.Processor
           item.Add(new XAttribute(Immutables.PROCESSED, Immutables.TRUE));
         });
       return resultXDoc;
+      
     }
     public XDocument AddSingleNode(XDocument diffXDoc, XDocument resultXDoc)//Done
     {

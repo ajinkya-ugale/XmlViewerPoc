@@ -9,3 +9,9 @@ D:\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\bin\Debug\X
 D:\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.csproj.CoreCompileInputs.cache
 D:\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.dll
 D:\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.pdb
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\bin\Debug\Xml.Diff.Creation.dll
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\bin\Debug\Xml.Diff.Creation.pdb
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.csprojResolveAssemblyReference.cache
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.csproj.CoreCompileInputs.cache
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.dll
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.pdb

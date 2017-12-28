@@ -7045,11 +7045,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\ampp-xml-diff-processor\\ampp-xml-diff-processor\\Xml.Viewer.Console\\Xml.Viewer.Console.csproj",
+      "projectUniqueName": "D:\\WS\\XmlViewerPoc\\src\\ampp-xml-diff-processor\\ampp-xml-diff-processor\\Xml.Viewer.Console\\Xml.Viewer.Console.csproj",
       "projectName": "Xml.Viewer.Console",
-      "projectPath": "D:\\ampp-xml-diff-processor\\ampp-xml-diff-processor\\Xml.Viewer.Console\\Xml.Viewer.Console.csproj",
+      "projectPath": "D:\\WS\\XmlViewerPoc\\src\\ampp-xml-diff-processor\\ampp-xml-diff-processor\\Xml.Viewer.Console\\Xml.Viewer.Console.csproj",
       "packagesPath": "C:\\Users\\auo1515\\.nuget\\packages\\",
-      "outputPath": "D:\\ampp-xml-diff-processor\\ampp-xml-diff-processor\\Xml.Viewer.Console\\obj\\",
+      "outputPath": "D:\\WS\\XmlViewerPoc\\src\\ampp-xml-diff-processor\\ampp-xml-diff-processor\\Xml.Viewer.Console\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\auo1515\\AppData\\Roaming\\NuGet\\NuGet.Config",

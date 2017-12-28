@@ -1,4 +1,5 @@
 ﻿
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -27,19 +28,19 @@ namespace Xml.Diff.Creation
         if (System.IO.File.Exists(diffFileName) == true)
           System.IO.File.Delete(diffFileName);
       }
-      //public void CreateDiff()
-      //{
-      //  XmlTextWriter tw = new XmlTextWriter(new StreamWriter(diffFileName));
-      //  tw.Formatting = Formatting.Indented;
-      //  try
-      //  {
-      //    XmlDiff diff = new XmlDiff();
-      //    diff.Compare(originalFileName, compareFileName, false, tw);
-      //  }
-      //  catch { }
-      //  finally { tw.Close(); }
-      //}
-      public void CreateXDoc()
+    //public void CreateDiff()
+    //{
+    //  XmlTextWriter tw = new XmlTextWriter(new StreamWriter(diffFileName));
+    //  tw.Formatting = Formatting.Indented;
+    //  try
+    //  {
+    //    XmlDiff diff = new XmlDiff();
+    //    diff.Compare(originalFileName, compareFileName, false, tw);
+    //  }
+    //  catch { }
+    //  finally { tw.Close(); }
+    //}
+    public void CreateXDoc()
       {
         originalXDoc = XDocument.Load(originalFileName);
         resultXDoc = originalXDoc;
