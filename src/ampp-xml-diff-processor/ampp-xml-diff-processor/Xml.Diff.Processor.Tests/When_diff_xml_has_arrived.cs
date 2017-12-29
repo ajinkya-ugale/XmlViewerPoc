@@ -43,38 +43,39 @@ namespace Xml.Diff.Processor.Tests
     [Test]
     public void FindRoot_method_should_add_cs_base_attribute()
     {
+      Cs_BaseAttributeAdditionAtRootNodeInDiffXml csBaseAttributeAdditionAtRootNodeInDiffXml=new Cs_BaseAttributeAdditionAtRootNodeInDiffXml();
       XDocument diffXDoc = new XDocument();
       diffXDoc = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\"><xd:change match =\"1\" name =\"yy\"/><xd:node match =\"3\"/><xd:add><e>Some text 4 </e><f>Some text 5</f></xd:add><xd:node match =\"4\"><xd:change match =\"1\">Changed text</xd:change><xd:remove match =\"2\"/></xd:node><xd:node match =\"5\"><xd:remove match =\"@secondAttr\"/><xd:add type =\"2\" name =\"newAttr\">new value</xd:add><xd:change match =\"@firstAttr\">changed attribute value</xd:change></xd:node><xd:remove match =\"6\" opid =\"1\"/><xd:add type =\"1\" name =\"p\"><xd:add type =\"1\" name =\"q\"><xd:add match =\"/1/6\" opid =\"1\"/></xd:add></xd:add></xd:node><xd:descriptor opid =\"1\" type =\"move\"/></xd:xmldiff>");
       XDocument expectedResult = new XDocument();
       expectedResult = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" /><xd:node match =\"3\" /><xd:add><e>Some text 4 </e><f>Some text 5</f></xd:add><xd:node match =\"4\"><xd:change match =\"1\">Changed text</xd:change><xd:remove match =\"2\" /></xd:node><xd:node match =\"5\"><xd:remove match =\"@secondAttr\" /><xd:add type =\"2\" name =\"newAttr\">new value</xd:add><xd:change match =\"@firstAttr\">changed attribute value</xd:change></xd:node><xd:remove match =\"6\" opid =\"1\" /><xd:add type =\"1\" name =\"p\"><xd:add type =\"1\" name =\"q\"><xd:add match =\"/1/6\" opid =\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid =\"1\" type =\"move\" /></xd:xmldiff>");
-      Assert.AreEqual(expectedResult.ToString(), diffXmlProcessor.FindRootNode(diffXDoc).ToString());
+      Assert.AreEqual(expectedResult.ToString(), csBaseAttributeAdditionAtRootNodeInDiffXml.AddCsBaseAttributeAtRootNode(diffXDoc).ToString());
     }
 
     [Test]
     public void FindRoot_method_should_not_return_null_document()
     {
-
+      Cs_BaseAttributeAdditionAtRootNodeInDiffXml csBaseAttributeAdditionAtRootNodeInDiffXml = new Cs_BaseAttributeAdditionAtRootNodeInDiffXml();
       XDocument diffXDoc = new XDocument();
       diffXDoc = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"3651185247969030976\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\"><xd:change match =\"1\" name =\"yy\"/></xd:node></xd:xmldiff>");
-      Assert.AreNotEqual(null, diffXmlProcessor.FindRootNode(diffXDoc).ToString());
+      Assert.AreNotEqual(null, csBaseAttributeAdditionAtRootNodeInDiffXml.AddCsBaseAttributeAtRootNode(diffXDoc).ToString());
     }
 
-    [Test]
-    public void when_FindChildFamily_method_call_it_should_add_cs_parent_attribute_and_parent_pointer()
-    {
-      XDocument diffXDoc = new XDocument();
-      diffXDoc = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" /><xd:node match =\"3\" /><xd:add><e>Some text 4</e><f>Some text 5</f></xd:add><xd:node match =\"4\"><xd:change match =\"1\">Changed text</xd:change><xd:remove match =\"2\" /></xd:node><xd:node match =\"5\"><xd:remove match =\"@secondAttr\" /><xd:add type =\"2\" name =\"newAttr\">new value</xd:add><xd:change match =\"@firstAttr\">changed attribute value</xd:change></xd:node><xd:remove match =\"6\" opid =\"1\" /><xd:add type =\"1\" name =\"p\"><xd:add type =\"1\" name =\"q\"><xd:add match =\"/1/6\" opid =\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid =\"1\" type =\"move\" /></xd:xmldiff>");
-      XDocument expectedResult = new XDocument();
-      expectedResult = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match= \"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" cs_parent =\"1\" /><xd:node match =\"3\" /><xd:add cs_parent =\"1/3\"><e>Some text 4</e><f>Some text 5</f></xd:add><xd:node match =\"4\"><xd:change match =\"1\" cs_parent =\"1/4\">Changed text</xd:change><xd:remove match =\"2\" cs_parent =\"1/4\" /></xd:node><xd:node match =\"5\"><xd:remove match =\"@secondAttr\" cs_parent =\"1/5\" /><xd:add type =\"2\" name =\"newAttr\" cs_parent =\"1/5\">new value</xd:add><xd:change match =\"@firstAttr\" cs_parent =\"1/5\">changed attribute value</xd:change></xd:node><xd:remove match =\"6\" opid =\"1\" cs_parent =\"1\" /><xd:add type =\"1\" name =\"p\" cs_parent =\"1/5\"><xd:add type =\"1\" name =\"q\"><xd:add match =\"/1/6\" opid =\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid =\"1\" type =\"move\" /></xd:xmldiff>");
-      Assert.AreEqual(expectedResult.ToString(), diffXmlProcessor.FindChildFamily(diffXDoc).ToString());
-    }
-    [Test]
-    public void when_FindChildFamily_method_call_it_should_add_cs_parent_attribute_and_parent_pointer_and_return_value_should_not_be_null()
-    {
-      XDocument diffXDoc = new XDocument();
-      diffXDoc = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" /><xd:node match =\"3\" /><xd:add><e>Some text 4</e><f>Some text 5</f></xd:add><xd:node match =\"4\"><xd:change match =\"1\">Changed text</xd:change><xd:remove match =\"2\" /></xd:node><xd:node match =\"5\"><xd:remove match =\"@secondAttr\" /><xd:add type =\"2\" name =\"newAttr\">new value</xd:add><xd:change match =\"@firstAttr\">changed attribute value</xd:change></xd:node><xd:remove match =\"6\" opid =\"1\" /><xd:add type =\"1\" name =\"p\"><xd:add type =\"1\" name =\"q\"><xd:add match =\"/1/6\" opid =\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid =\"1\" type =\"move\" /></xd:xmldiff>");
-      Assert.AreNotEqual(null, diffXmlProcessor.FindChildFamily(diffXDoc).ToString());
-    }
+    //[Test]
+    //public void when_FindChildFamily_method_call_it_should_add_cs_parent_attribute_and_parent_pointer()
+    //{
+    //  XDocument diffXDoc = new XDocument();
+    //  diffXDoc = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" /><xd:node match =\"3\" /><xd:add><e>Some text 4</e><f>Some text 5</f></xd:add><xd:node match =\"4\"><xd:change match =\"1\">Changed text</xd:change><xd:remove match =\"2\" /></xd:node><xd:node match =\"5\"><xd:remove match =\"@secondAttr\" /><xd:add type =\"2\" name =\"newAttr\">new value</xd:add><xd:change match =\"@firstAttr\">changed attribute value</xd:change></xd:node><xd:remove match =\"6\" opid =\"1\" /><xd:add type =\"1\" name =\"p\"><xd:add type =\"1\" name =\"q\"><xd:add match =\"/1/6\" opid =\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid =\"1\" type =\"move\" /></xd:xmldiff>");
+    //  XDocument expectedResult = new XDocument();
+    //  expectedResult = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match= \"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" cs_parent =\"1\" /><xd:node match =\"3\" /><xd:add cs_parent =\"1/3\"><e>Some text 4</e><f>Some text 5</f></xd:add><xd:node match =\"4\"><xd:change match =\"1\" cs_parent =\"1/4\">Changed text</xd:change><xd:remove match =\"2\" cs_parent =\"1/4\" /></xd:node><xd:node match =\"5\"><xd:remove match =\"@secondAttr\" cs_parent =\"1/5\" /><xd:add type =\"2\" name =\"newAttr\" cs_parent =\"1/5\">new value</xd:add><xd:change match =\"@firstAttr\" cs_parent =\"1/5\">changed attribute value</xd:change></xd:node><xd:remove match =\"6\" opid =\"1\" cs_parent =\"1\" /><xd:add type =\"1\" name =\"p\" cs_parent =\"1/5\"><xd:add type =\"1\" name =\"q\"><xd:add match =\"/1/6\" opid =\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid =\"1\" type =\"move\" /></xd:xmldiff>");
+    //  Assert.AreEqual(expectedResult.ToString(), diffXmlProcessor.FindChildFamily(diffXDoc).ToString());
+    //}
+    //[Test]
+    //public void when_FindChildFamily_method_call_it_should_add_cs_parent_attribute_and_parent_pointer_and_return_value_should_not_be_null()
+    //{
+    //  XDocument diffXDoc = new XDocument();
+    //  diffXDoc = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" /><xd:node match =\"3\" /><xd:add><e>Some text 4</e><f>Some text 5</f></xd:add><xd:node match =\"4\"><xd:change match =\"1\">Changed text</xd:change><xd:remove match =\"2\" /></xd:node><xd:node match =\"5\"><xd:remove match =\"@secondAttr\" /><xd:add type =\"2\" name =\"newAttr\">new value</xd:add><xd:change match =\"@firstAttr\">changed attribute value</xd:change></xd:node><xd:remove match =\"6\" opid =\"1\" /><xd:add type =\"1\" name =\"p\"><xd:add type =\"1\" name =\"q\"><xd:add match =\"/1/6\" opid =\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid =\"1\" type =\"move\" /></xd:xmldiff>");
+    //  Assert.AreNotEqual(null, diffXmlProcessor.FindChildFamily(diffXDoc).ToString());
+    //}
     [Test]
     public void when_GetParentPointer_Method_call_it_should_return_the_parent_pointer()
     {
@@ -109,43 +110,49 @@ namespace Xml.Diff.Processor.Tests
     [Test]
     public void when_GetFamilyOfDeleteAndChange_Method_call_it_should_add_cs_parent_and_parent_pointer()
     {
+      AddCs_ParentAttributeAndParentPointerAtChangeAndRemoveNode addCsParentAttributeAndParentPointerAtChangeAndRemove=new AddCs_ParentAttributeAndParentPointerAtChangeAndRemoveNode();
       XDocument diffXDoc = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"3651185247969030976\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" /></xd:node></xd:xmldiff>");
       XDocument expectedResult = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"3651185247969030976\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" cs_parent =\"1\" /></xd:node></xd:xmldiff>");
-      Assert.AreEqual(expectedResult.ToString(), diffXmlProcessor.GetFamilyOfDeleteAndChange("change", diffXDoc).ToString());
+      Assert.AreEqual(expectedResult.ToString(), addCsParentAttributeAndParentPointerAtChangeAndRemove.AddCsParentAttributeAtFamilyOfDeleteAndChangeNode("change", diffXDoc).ToString());
     }
     [Test]
     public void when_GetFamilyOfDeleteAndChange_Method_call_it_should_not_be_null()
     {
+      AddCs_ParentAttributeAndParentPointerAtChangeAndRemoveNode addCsParentAttributeAndParentPointerAtChangeAndRemove = new AddCs_ParentAttributeAndParentPointerAtChangeAndRemoveNode();
       XDocument diffXDoc = XDocument.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"3651185247969030976\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base =\"true\"><xd:change match =\"1\" name =\"yy\" /></xd:node></xd:xmldiff>");
-      Assert.AreNotEqual(null, diffXmlProcessor.GetFamilyOfDeleteAndChange("change", diffXDoc).ToString());
+      Assert.AreNotEqual(null, addCsParentAttributeAndParentPointerAtChangeAndRemove.AddCsParentAttributeAtFamilyOfDeleteAndChangeNode("change", diffXDoc).ToString());
     }
     [Test]
     public void when_GetFamilyOfAdd_Method_call_it_should_add_cs_base_and_pointer()
     {
+      AtAddNodeAddCs_ParentAttributeAndParentPointer atAddNodeAddCsParentAttributeAndParentPointer=new AtAddNodeAddCs_ParentAttributeAndParentPointer();
       XDocument diffXDoc = XDocument.Parse("<xd:xmldiff version =\"1.0\" srcDocHash=\"3651185247969030976\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base=\"true\"><xd:node match =\"1\" /><xd:add><b>Some text 2</b><c>Some text 3</c></xd:add></xd:node></xd:xmldiff>");
       XDocument expectedResult = XDocument.Parse("<xd:xmldiff version =\"1.0\" srcDocHash=\"3651185247969030976\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base=\"true\"><xd:node match =\"1\" /><xd:add cs_parent=\"1/1\"><b>Some text 2</b><c>Some text 3</c></xd:add></xd:node></xd:xmldiff>");
-      Assert.AreEqual(expectedResult.ToString(), diffXmlProcessor.GetFamilyOfAdd(diffXDoc).ToString());
+      Assert.AreEqual(expectedResult.ToString(), atAddNodeAddCsParentAttributeAndParentPointer.AddCsParentAndParentPointerAtFamilyOfAddNode(diffXDoc).ToString());
     }
     [Test]
     public void when_GetFamilyOfAdd_Method_call_it_should_not_be_null()
     {
+      AtAddNodeAddCs_ParentAttributeAndParentPointer atAddNodeAddCsParentAttributeAndParentPointer = new AtAddNodeAddCs_ParentAttributeAndParentPointer();
       XDocument diffXDoc = XDocument.Parse("<xd:xmldiff version =\"1.0\" srcDocHash=\"3651185247969030976\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match =\"1\" cs_base=\"true\"><xd:node match =\"1\" /><xd:add><b>Some text 2</b><c>Some text 3</c></xd:add></xd:node></xd:xmldiff>");
-      Assert.AreNotEqual(null, diffXmlProcessor.GetFamilyOfAdd(diffXDoc).ToString());
+      Assert.AreNotEqual(null, atAddNodeAddCsParentAttributeAndParentPointer.AddCsParentAndParentPointerAtFamilyOfAddNode(diffXDoc).ToString());
     }
     [Test]
     public void when_CheckPreviosSibling_Method_call_it_should_return_previous_sibling()
     {
+      AtAddNodeAddCs_ParentAttributeAndParentPointer atAddNodeAddCsParentAttributeAndParentPointer = new AtAddNodeAddCs_ParentAttributeAndParentPointer();
       //XElement diffXDoc = XElement.Parse("<xd:add xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><e>Some text 4</e><f>Some text 5</f></xd:add>");
       XElement diffXDoc = XElement.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match=\"1\" cs_base=\"true\"><xd:change match=\"1\" name=\"yy\" cs_parent=\"1\" /><xd:node match=\"3\" /><xd:add><e>Some text 4</e><f>Some text 5</f></xd:add><xd:node match=\"4\"><xd:change match=\"1\" cs_parent=\"1/4\">Changed text</xd:change><xd:remove match=\"2\" cs_parent=\"1/4\" /></xd:node><xd:node match=\"5\"><xd:remove match=\"@secondAttr\" cs_parent=\"1/5\" /><xd:add type=\"2\" name=\"newAttr\">new value</xd:add><xd:change match=\"@firstAttr\" cs_parent=\"1/5\">changed attribute value</xd:change></xd:node><xd:remove match=\"6\" opid=\"1\" cs_parent=\"1\" /><xd:add type=\"1\" name=\"p\"><xd:add type=\"1\" name=\"q\"><xd:add match=\"/1/6\" opid=\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid=\"1\" type=\"move\" /></xd:xmldiff>");
       XElement expectedResult = XElement.Parse("<xd:node match=\"3\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\" />");
       //"<xd:node match=\"1\"  xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\" cs_base=\"true\"><xd:change match=\"1\" name=\"yy\" cs_parent=\"1\" /><xd:node match=\"3\" /><xd:add><e>Some text 4</e><f>Some text 5</f></xd:add></xd:node>");
-      Assert.AreEqual(expectedResult.ToString(), diffXmlProcessor.CheckPreviosSibling(diffXDoc.Descendants().First(x => x.Name.LocalName == "add")).ToString());
+      Assert.AreEqual(expectedResult.ToString(), atAddNodeAddCsParentAttributeAndParentPointer.CheckPreviosSibling(diffXDoc.Descendants().First(x => x.Name.LocalName == "add")).ToString());
     }
     [Test]
     public void when_CheckPreviosSibling_Method_call_it_should_not_be_null()
     {
+      AtAddNodeAddCs_ParentAttributeAndParentPointer atAddNodeAddCsParentAttributeAndParentPointer = new AtAddNodeAddCs_ParentAttributeAndParentPointer();
       XElement diffXDoc = XElement.Parse("<xd:xmldiff version=\"1.0\" srcDocHash=\"1760821081405616385\" options=\"None\" fragments=\"no\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match=\"1\" cs_base=\"true\"><xd:change match=\"1\" name=\"yy\" cs_parent=\"1\" /><xd:node match=\"3\" /><xd:add><e>Some text 4</e><f>Some text 5</f></xd:add><xd:node match=\"4\"><xd:change match=\"1\" cs_parent=\"1/4\">Changed text</xd:change><xd:remove match=\"2\" cs_parent=\"1/4\" /></xd:node><xd:node match=\"5\"><xd:remove match=\"@secondAttr\" cs_parent=\"1/5\" /><xd:add type=\"2\" name=\"newAttr\">new value</xd:add><xd:change match=\"@firstAttr\" cs_parent=\"1/5\">changed attribute value</xd:change></xd:node><xd:remove match=\"6\" opid=\"1\" cs_parent=\"1\" /><xd:add type=\"1\" name=\"p\"><xd:add type=\"1\" name=\"q\"><xd:add match=\"/1/6\" opid=\"1\" /></xd:add></xd:add></xd:node><xd:descriptor opid=\"1\" type=\"move\" /></xd:xmldiff>");
-      Assert.AreNotEqual(null, diffXmlProcessor.CheckPreviosSibling(diffXDoc.Descendants().First(x => x.Name.LocalName == "add")).ToString());
+      Assert.AreNotEqual(null, atAddNodeAddCsParentAttributeAndParentPointer.CheckPreviosSibling(diffXDoc.Descendants().First(x => x.Name.LocalName == "add")).ToString());
     }
 
   }

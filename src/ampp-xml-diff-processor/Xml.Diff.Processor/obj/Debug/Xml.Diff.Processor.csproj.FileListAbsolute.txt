@@ -27,7 +27,9 @@ D:\ampp-xml-diff-processor\Xml.Diff.Processor\obj\Debug\Xml.Diff.Processor.pdb
 D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\bin\Debug\Xml.Diff.Processor.dll
 D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\bin\Debug\Xml.Diff.Processor.pdb
 D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\bin\Debug\Xml.Diff.Creation.dll
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\bin\Debug\XmlDiffPatch.dll
 D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\bin\Debug\Xml.Diff.Creation.pdb
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\bin\Debug\Xml.Diff.Creation.dll.config
 D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\obj\Debug\Xml.Diff.Processor.csprojResolveAssemblyReference.cache
 D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\obj\Debug\Xml.Diff.Processor.csproj.CoreCompileInputs.cache
 D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\obj\Debug\Xml.Diff.Processor.dll

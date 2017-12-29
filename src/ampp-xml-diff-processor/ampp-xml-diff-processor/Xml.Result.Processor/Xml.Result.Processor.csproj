@@ -38,6 +38,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xml.Diff.Creation">
+      <HintPath>..\Xml.Diff.Creation\bin\Debug\Xml.Diff.Creation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddCrestId.cs" />
@@ -54,12 +57,6 @@
     <Compile Include="RenameTagValueInResult.cs" />
     <Compile Include="ResultXmlProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Xml.Diff.Creation\Xml.Diff.Creation.csproj">
-      <Project>{2e6a722c-a6a4-4b90-8edb-73ee4bfeb677}</Project>
-      <Name>Xml.Diff.Creation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

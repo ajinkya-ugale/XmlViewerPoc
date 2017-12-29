@@ -44,9 +44,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xml.Result.Processor">
-      <HintPath>..\Xml.Result.Processor\bin\Debug\Xml.Result.Processor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +65,10 @@
     <ProjectReference Include="..\Xml.Diff.Creation\Xml.Diff.Creation.csproj">
       <Project>{2e6a722c-a6a4-4b90-8edb-73ee4bfeb677}</Project>
       <Name>Xml.Diff.Creation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xml.Result.Processor\Xml.Result.Processor.csproj">
+      <Project>{c3cecbbe-4580-41b0-ba52-4e6ceced2360}</Project>
+      <Name>Xml.Result.Processor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

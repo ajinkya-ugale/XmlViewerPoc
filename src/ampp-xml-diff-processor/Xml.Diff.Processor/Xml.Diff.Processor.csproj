@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAttributeAtChildFunctionality.cs" />
+    <Compile Include="AddCs_ParentAttributeAndParentPointerAtChangeAndRemoveNode.cs" />
+    <Compile Include="AtAddNodeAddCs_ParentAttributeAndParentPointer.cs" />
+    <Compile Include="Cs_BaseAttributeAdditionAtRootNodeInDiffXml.cs" />
     <Compile Include="CustomAttribute.cs" />
     <Compile Include="DiffXmlProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
