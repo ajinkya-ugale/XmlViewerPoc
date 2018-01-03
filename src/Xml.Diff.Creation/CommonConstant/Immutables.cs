@@ -1,6 +1,4 @@
-﻿
-
-namespace Xml.Diff.Creation.CommonConstant
+﻿namespace Xml.Diff.Creation.CommonConstant
 {
  public class Immutables
   {

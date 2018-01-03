@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using Xml.Diff.Creation.CommonConstant;
@@ -12,7 +9,7 @@ namespace Xml.Result.Processor
 {
   public class ChangeAttributeOfNode
   {
-    public XDocument ChangeAttrNode(XDocument diffXDoc, XDocument resultXDoc)//Done
+    public XDocument ChangeAttrNode(XDocument diffXDoc, XDocument resultXDoc)
     {
       diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + Immutables.CHANGE).Where(s => s.Attribute(Immutables.NAME) != null).ToList()
         .ForEach(item =>

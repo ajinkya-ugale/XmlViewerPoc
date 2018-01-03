@@ -39,3 +39,4 @@ D:\XML_Viewer\New folder\XmlViewerPoc\src\Xml.Result.Processor\obj\Debug\Xml.Res
 D:\XML_Viewer\New folder\XmlViewerPoc\src\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.csproj.CoreCompileInputs.cache
 D:\XML_Viewer\New folder\XmlViewerPoc\src\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.dll
 D:\XML_Viewer\New folder\XmlViewerPoc\src\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.pdb
+D:\WS\XmlViewerPoc\src\Xml.Result.Processor\obj\Debug\Xml.Result.Processor.csprojResolveAssemblyReference.cache

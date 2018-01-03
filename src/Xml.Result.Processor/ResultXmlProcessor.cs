@@ -17,7 +17,7 @@ namespace Xml.Result.Processor
       AddFunctionality addFunctionality=new AddFunctionality();
       _resultXDoc = addFunctionality.AddNodeAttributeAndNode(diffXDoc, _resultXDoc);
       ModificationFunctionalitiy modificationFunctionalitiy=new ModificationFunctionalitiy();
-      SaveResultXML(modificationFunctionalitiy.ModifyResult(diffXDoc,_resultXDoc));
+      SaveResultXML(modificationFunctionalitiy.ModifyResult(_resultXDoc));
     }
 
     private void SaveResultXML(XDocument resultXDoc)

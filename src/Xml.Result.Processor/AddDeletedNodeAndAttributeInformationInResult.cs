@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using Xml.Diff.Creation.CommonConstant;
 using Xml.Diff.Creation.Utilities;
@@ -11,13 +8,13 @@ namespace Xml.Result.Processor
 {
   public class AddDeletedNodeAndAttributeInformationInResult
   {
-    public XDocument DeleteNode(XDocument diffXDoc, XDocument resultXDoc)//Done
+    public XDocument DeleteNode(XDocument diffXDoc, XDocument resultXDoc)
     {
       diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + Immutables.REMOVE).Where(s => s.Attribute(Immutables.MATCH) != null && s.Attribute(Immutables.OPID) == null).ToList()
         .ForEach(item =>
         {
           string nodeposiiton = item.Attribute(Immutables.MATCH).Value;
-          if (nodeposiiton.Contains(Immutables.AT_SIGN) == true)
+          if (nodeposiiton.Contains(Immutables.AT_SIGN))
           {
             //delete attr 
             string parentposition = item.Attribute(Immutables.CS_PARENT).Value;

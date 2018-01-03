@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Xml.Linq;
 using Xml.Diff.Creation.CommonConstant;
 
@@ -27,7 +23,7 @@ namespace Xml.Result.Processor
       //      s.Remove();
       //  });
     }
-    public XDocument DeleteMovedNodeAtr(XDocument resultXDoc)//Done
+    public XDocument DeleteMovedNodeAtr(XDocument resultXDoc)
     {
       resultXDoc.Descendants().Where(s => s.Attribute("Moved") != null && s.Attribute(Immutables.DELETED) != null && s.Attribute("Moved").Value == Immutables.TRUE && s.Attribute(Immutables.DELETED).Value == Immutables.TRUE).ToList()
         .ForEach(d =>

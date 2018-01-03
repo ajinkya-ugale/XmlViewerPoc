@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using Xml.Diff.Creation.CommonConstant;
@@ -13,7 +10,7 @@ namespace Xml.Result.Processor
  public class AddCrestId
   {
     XDocument _resultXDoc;
-    public XDocument AddCrestID(XDocument diffXDoc,XDocument resultXDoc)//Confuse
+    public XDocument AddCrestID(XDocument diffXDoc,XDocument resultXDoc)
     {
       _resultXDoc = resultXDoc;
       diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + Immutables.NODE).ToList()
@@ -25,14 +22,14 @@ namespace Xml.Result.Processor
         });
       return resultXDoc;
     }
-    public XElement GetResultNodes(XElement item)//ResultXDoc Issue
+    public XElement GetResultNodes(XElement item)
     {
       
       string parentPointer = CommonUtilities.GetParentpointer(item);
       XElement nd = GetBeforeIFActualNd(parentPointer, _resultXDoc);
       return nd;
     }
-    public XElement GetBeforeIFActualNd(string parentposition, XDocument resultXDoc)//Done
+    public XElement GetBeforeIFActualNd(string parentposition, XDocument resultXDoc)
     {
       XElement item = null;
       int counter = parentposition.Split(Immutables.FORWARD_SLASH).Length;
@@ -46,7 +43,7 @@ namespace Xml.Result.Processor
         }
         else
         {
-          if (parentposition.Contains(Immutables.FORWARD_SLASH) == true)
+          if (parentposition.Contains(Immutables.FORWARD_SLASH))
           {
             string pos1 = parentposition.Split(Immutables.FORWARD_SLASH)[p];
             int pos = Convert.ToInt32(pos1) - 1;

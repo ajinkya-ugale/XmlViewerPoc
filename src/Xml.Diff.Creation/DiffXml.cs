@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Xml;
-using System.Xml.Linq;
 using Microsoft.XmlDiffPatch;
 
 namespace Xml.Diff.Creation
 {
   public class DiffXml
   {
-    
-    public void CreateDiff(string originalFile,string compareFile,string diffFileName)
+
+    public void CreateDiff(string originalFile, string compareFile, string diffFileName)
     {
       XmlTextWriter tw = new XmlTextWriter(new StreamWriter(diffFileName));
       tw.Formatting = Formatting.Indented;
@@ -26,6 +19,6 @@ namespace Xml.Diff.Creation
       catch { }
       finally { tw.Close(); }
     }
-    
+
   }
 }

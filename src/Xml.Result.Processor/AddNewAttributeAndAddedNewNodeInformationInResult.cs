@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Xml.Linq;
 using Xml.Diff.Creation.CommonConstant;
 using Xml.Diff.Creation.Utilities;
@@ -11,7 +7,7 @@ namespace Xml.Result.Processor
 {
   public class AddNewAttributeAndAddedNewNodeInformationInResult
   {
-    public XDocument AddNodeattr(XDocument diffXDoc, XDocument resultXDoc)//Done
+    public XDocument AddNodeattr(XDocument diffXDoc, XDocument resultXDoc)
     {
       diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + Immutables.ADD).Where(s => s.Attribute(Immutables.TYPE) != null && s.Attribute(Immutables.TYPE).Value == "2" && s.Attribute(Immutables.PROCESSED) == null).ToList()
         .ForEach(item =>
@@ -25,7 +21,7 @@ namespace Xml.Result.Processor
       return resultXDoc;
       
     }
-    public XDocument AddSingleNode(XDocument diffXDoc, XDocument resultXDoc)//Done
+    public XDocument AddSingleNode(XDocument diffXDoc, XDocument resultXDoc)
     {
       diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + Immutables.ADD).Where(s => s.Attribute(Immutables.TYPE) == null && s.Attribute(Immutables.OPID) == null && s.Attribute(Immutables.NAME) == null).ToList()
         .ForEach(item =>
@@ -54,7 +50,7 @@ namespace Xml.Result.Processor
         });
       return resultXDoc;
     }
-    public XDocument ProcessNode(XElement item, XDocument diffXDoc, XDocument resultXDoc)//Done
+    public XDocument ProcessNode(XElement item, XDocument diffXDoc, XDocument resultXDoc)
     {
       if (item.Attribute(Immutables.PROCESSED) == null)
       {

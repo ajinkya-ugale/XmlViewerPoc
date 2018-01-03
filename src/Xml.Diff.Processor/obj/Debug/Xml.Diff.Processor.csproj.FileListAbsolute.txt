@@ -38,3 +38,4 @@ D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\Xml.Diff.Processor\obj\Debug\Xml.
 D:\ws\XmlViewerPoc\src\Xml.Diff.Processor\obj\Debug\Xml.Diff.Processor.csproj.CoreCompileInputs.cache
 D:\ws\XmlViewerPoc\src\Xml.Diff.Processor\obj\Debug\Xml.Diff.Processor.dll
 D:\ws\XmlViewerPoc\src\Xml.Diff.Processor\obj\Debug\Xml.Diff.Processor.pdb
+D:\WS\XmlViewerPoc\src\Xml.Diff.Processor\obj\Debug\Xml.Diff.Processor.csprojResolveAssemblyReference.cache

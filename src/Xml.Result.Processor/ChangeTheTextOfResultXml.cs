@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using Xml.Diff.Creation.CommonConstant;
@@ -12,7 +9,7 @@ namespace Xml.Result.Processor
 {
   public class ChangeTheTextOfResultXml
   {
-    public XDocument ChangeNodeText(XDocument diffXDoc, XDocument resultXDoc)//Done
+    public XDocument ChangeNodeText(XDocument diffXDoc, XDocument resultXDoc)
     {
       diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + Immutables.CHANGE).Where(s => s.Attribute(Immutables.MATCH) != null && s.Attribute(Immutables.NAME) == null).ToList()
           .ForEach(item =>
@@ -33,7 +30,7 @@ namespace Xml.Result.Processor
 
     private void ChangeNodeTextWhenNodePositionIsNotDigit(XDocument resultXDoc, XElement item)
     {
-      if (item.Attribute(Immutables.MATCH).Value.Contains(Immutables.AT_SIGN) == true)
+      if (item.Attribute(Immutables.MATCH).Value.Contains(Immutables.AT_SIGN))
       {
         string atrname = item.Attribute(Immutables.MATCH).Value.Replace(Immutables.AT_SIGN, "");
         string parentposition = item.Attribute(Immutables.CS_PARENT).Value;

@@ -5,10 +5,6 @@ namespace Xml.Diff.Processor
   public class DiffXmlProcessor
   {
     private XDocument _diffXDoc;
-    public DiffXmlProcessor()
-    {
-
-    }
 
     public XDocument Process(XDocument diffXml)
     {

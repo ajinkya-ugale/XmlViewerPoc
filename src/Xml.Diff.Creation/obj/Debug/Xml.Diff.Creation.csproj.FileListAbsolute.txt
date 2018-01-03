@@ -27,3 +27,5 @@ D:\ws\XmlViewerPoc\src\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.csprojResol
 D:\ws\XmlViewerPoc\src\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.csproj.CoreCompileInputs.cache
 D:\ws\XmlViewerPoc\src\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.dll
 D:\ws\XmlViewerPoc\src\Xml.Diff.Creation\obj\Debug\Xml.Diff.Creation.pdb
+D:\WS\XmlViewerPoc\build\Xml.Diff.Creation\Xml.Diff.Creation.dll.CodeAnalysisLog.xml
+D:\WS\XmlViewerPoc\build\Xml.Diff.Creation\Xml.Diff.Creation.dll.lastcodeanalysissucceeded
