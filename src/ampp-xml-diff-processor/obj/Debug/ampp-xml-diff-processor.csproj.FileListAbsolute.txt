@@ -1,0 +1,12 @@
+D:\ws\XmlViewerPoc\src\ampp-xml-diff-processor\bin\Debug\ampp-xml-diff-processor.dll
+D:\ws\XmlViewerPoc\src\ampp-xml-diff-processor\bin\Debug\ampp-xml-diff-processor.pdb
+D:\ws\XmlViewerPoc\src\ampp-xml-diff-processor\obj\Debug\ampp-xml-diff-processor.csprojResolveAssemblyReference.cache
+D:\ws\XmlViewerPoc\src\ampp-xml-diff-processor\obj\Debug\ampp-xml-diff-processor.csproj.CoreCompileInputs.cache
+D:\ws\XmlViewerPoc\src\ampp-xml-diff-processor\obj\Debug\ampp-xml-diff-processor.dll
+D:\ws\XmlViewerPoc\src\ampp-xml-diff-processor\obj\Debug\ampp-xml-diff-processor.pdb
+D:\XML_Viewer\New folder\XmlViewerPoc\build\Xml.Diff.Processor\ampp-xml-diff-processor.dll
+D:\XML_Viewer\New folder\XmlViewerPoc\build\Xml.Diff.Processor\ampp-xml-diff-processor.pdb
+D:\XML_Viewer\New folder\XmlViewerPoc\src\ampp-xml-diff-processor\obj\Debug\ampp-xml-diff-processor.csprojResolveAssemblyReference.cache
+D:\XML_Viewer\New folder\XmlViewerPoc\src\ampp-xml-diff-processor\obj\Debug\ampp-xml-diff-processor.csproj.CoreCompileInputs.cache
+D:\XML_Viewer\New folder\XmlViewerPoc\src\ampp-xml-diff-processor\obj\Debug\ampp-xml-diff-processor.dll
+D:\XML_Viewer\New folder\XmlViewerPoc\src\ampp-xml-diff-processor\obj\Debug\ampp-xml-diff-processor.pdb

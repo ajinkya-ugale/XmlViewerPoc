@@ -1,0 +1,16 @@
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\XmlViewer.Console\obj\Debug\XmlViewer.Console.csprojResolveAssemblyReference.cache
+D:\WS\XmlViewerPoc\src\ampp-xml-diff-processor\ampp-xml-diff-processor\XmlViewer.Console\obj\Debug\XmlViewer.Console.csproj.CoreCompileInputs.cache
+D:\ws\XmlViewerPoc\src\XmlViewer.Console\obj\Debug\XmlViewer.Console.csprojResolveAssemblyReference.cache
+D:\ws\XmlViewerPoc\src\XmlViewer.Console\obj\Debug\XmlViewer.Console.csproj.CoreCompileInputs.cache
+D:\ws\XmlViewerPoc\build\XmlViewer.Console\XmlViewer.Console.exe.config
+D:\ws\XmlViewerPoc\build\XmlViewer.Console\XmlViewer.Console.exe
+D:\ws\XmlViewerPoc\build\XmlViewer.Console\XmlViewer.Console.pdb
+D:\ws\XmlViewerPoc\src\XmlViewer.Console\obj\Debug\XmlViewer.Console.exe
+D:\ws\XmlViewerPoc\src\XmlViewer.Console\obj\Debug\XmlViewer.Console.pdb
+D:\XML_Viewer\New folder\XmlViewerPoc\build\XmlViewer.Console\XmlViewer.Console.exe.config
+D:\XML_Viewer\New folder\XmlViewerPoc\build\XmlViewer.Console\XmlViewer.Console.exe
+D:\XML_Viewer\New folder\XmlViewerPoc\build\XmlViewer.Console\XmlViewer.Console.pdb
+D:\XML_Viewer\New folder\XmlViewerPoc\src\XmlViewer.Console\obj\Debug\XmlViewer.Console.csprojResolveAssemblyReference.cache
+D:\XML_Viewer\New folder\XmlViewerPoc\src\XmlViewer.Console\obj\Debug\XmlViewer.Console.csproj.CoreCompileInputs.cache
+D:\XML_Viewer\New folder\XmlViewerPoc\src\XmlViewer.Console\obj\Debug\XmlViewer.Console.exe
+D:\XML_Viewer\New folder\XmlViewerPoc\src\XmlViewer.Console\obj\Debug\XmlViewer.Console.pdb

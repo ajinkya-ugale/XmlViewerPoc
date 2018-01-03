@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xd:xmldiff version="1.0" srcDocHash="1760821081405616385" options="None" fragments="no" xmlns:xd="http://schemas.microsoft.com/xmltools/2002/xmldiff">
+  <xd:node match="1">
+    <xd:change match="1" name="yy" />
+    <xd:node match="3" />
+    <xd:add>
+      <e>Some text 4</e>
+      <f>Some text 5</f>
+    </xd:add>
+    <xd:node match="4">
+      <xd:change match="1">Changed text</xd:change>
+      <xd:remove match="2" />
+    </xd:node>
+    <xd:node match="5">
+      <xd:remove match="@secondAttr" />
+      <xd:add type="2" name="newAttr">new value</xd:add>
+      <xd:change match="@firstAttr">changed attribute value</xd:change>
+    </xd:node>
+    <xd:remove match="6" opid="1" />
+    <xd:add type="1" name="p">
+      <xd:add type="1" name="q">
+        <xd:add match="/1/6" opid="1" />
+      </xd:add>
+    </xd:add>
+  </xd:node>
+  <xd:descriptor opid="1" type="move" />
+</xd:xmldiff>
