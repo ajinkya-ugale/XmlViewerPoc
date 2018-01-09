@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xd:xmldiff version="1.0" srcDocHash="1760821081405616385" options="None" fragments="no" xmlns:xd="http://schemas.microsoft.com/xmltools/2002/xmldiff">
+<xd:xmldiff version="1.0" srcDocHash="9770635442211014542" options="None" fragments="no" xmlns:xd="http://schemas.microsoft.com/xmltools/2002/xmldiff">
   <xd:node match="1">
     <xd:change match="1" name="yy" />
+    <xd:node match="2">
+      <xd:change match="1">intro</xd:change>
+    </xd:node>
     <xd:node match="3" />
     <xd:add>
       <e>Some text 4</e>
