@@ -6,12 +6,11 @@ using Xml.Diff.Processor;
 
 namespace XmlViewer.Console
 {
-  class Program
+  class XmlViewerConsole
   {
-    static void Main(string[] args)
+    static void Main()
     {
       XDocument originalXDoc = new XDocument();
-      XDocument compareXDoc = new XDocument();
       XDocument resultXDoc = new XDocument();
       XDocument diffXDoc;
       string orignalFilePath = "D:\\XML_Viewer\\1.xml";

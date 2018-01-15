@@ -187,4 +187,5 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 /src/.vs/ampp-xml-diff-processor/v15/sqlite3/storage.ide
+/D:/WS/XmlViewerPoc/build
 *.vssettings

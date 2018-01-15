@@ -9,8 +9,10 @@ namespace Xml.Result.Processor
 {
   public class ChangeTheTextOfResultXml
   {
+    private XDocument _resultXDoc;
     public XDocument ChangeNodeText(XDocument diffXDoc, XDocument resultXDoc)
     {
+      _resultXDoc = resultXDoc;
       diffXDoc.Descendants(diffXDoc.Root.Name.Namespace + Immutables.CHANGE).Where(s => s.Attribute(Immutables.MATCH) != null && s.Attribute(Immutables.NAME) == null).ToList()
           .ForEach(item =>
           {
@@ -18,41 +20,41 @@ namespace Xml.Result.Processor
             nodeposiiton = nodeposiiton.Split(Immutables.FORWARD_SLASH)[nodeposiiton.Split(Immutables.FORWARD_SLASH).Length - 1];
             if (nodeposiiton.All(Char.IsDigit))
             {
-              ChangeNodeTextWhenNodePositionIsDigit(resultXDoc, item, nodeposiiton);
+              ChangeNodeTextWhenNodePositionIsDigit(item, nodeposiiton);
             }
             else
             {
-              ChangeNodeTextWhenNodePositionIsNotDigit(resultXDoc, item);
+              ChangeNodeTextWhenNodePositionIsNotDigit(item);
             }
           });
-      return resultXDoc;
+      return _resultXDoc;
     }
 
-    private void ChangeNodeTextWhenNodePositionIsNotDigit(XDocument resultXDoc, XElement item)
+    private void ChangeNodeTextWhenNodePositionIsNotDigit(XElement item)
     {
       if (item.Attribute(Immutables.MATCH).Value.Contains(Immutables.AT_SIGN))
       {
         string atrname = item.Attribute(Immutables.MATCH).Value.Replace(Immutables.AT_SIGN, "");
         string parentposition = item.Attribute(Immutables.CS_PARENT).Value;
-        XNode nd = CommonUtilities.GetActualNd(parentposition, item, resultXDoc);
-        if (nd != null)
+        XNode xNode = CommonUtilities.GetActualNd(parentposition, item, _resultXDoc);
+        if (xNode != null)
         {
           XElement valnode = null;
-          if (nd.NodeType == XmlNodeType.Element)
-            valnode = (XElement)nd;
+          if (xNode.NodeType == XmlNodeType.Element)
+            valnode = (XElement)xNode;
           valnode.Add(new XAttribute(Immutables.OLDATTR_ + atrname, valnode.Attribute(atrname).Value));
           valnode.SetAttributeValue(atrname, item.Value);
         }
       }
     }
 
-    private void ChangeNodeTextWhenNodePositionIsDigit(XDocument resultXDoc, XElement item, string nodeposiiton)
+    private void ChangeNodeTextWhenNodePositionIsDigit(XElement item, string nodeposiiton)
     {
       string parentposition = item.Attribute(Immutables.CS_PARENT).Value;
-      XNode nd = CommonUtilities.GetActualNd(parentposition, item, resultXDoc);
+      XNode xNode = CommonUtilities.GetActualNd(parentposition, item, _resultXDoc);
       XElement valnode = null;
-      if (nd.NodeType == XmlNodeType.Element)
-        valnode = (XElement)nd;
+      if (xNode.NodeType == XmlNodeType.Element)
+        valnode = (XElement)xNode;
       XNode requiredNd = valnode.Nodes().ToList()[Convert.ToInt32(nodeposiiton) - 1];
       if (requiredNd.NodeType == XmlNodeType.Text)
       {

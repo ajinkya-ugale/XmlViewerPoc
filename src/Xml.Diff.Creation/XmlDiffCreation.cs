@@ -6,7 +6,7 @@ namespace Xml.Diff.Creation
   {
     string originalFileName = "";
     string compareFileName = "";
-    string _diffFileName = "difffilename";
+    string _diffFileName = "D:\\SampleXML\\diff.out";
     NameTable NS;
 
     public void CreateDiff(string orignalFile, string compareFile)

@@ -26,8 +26,8 @@ namespace Xml.Result.Processor
         .ForEach(item =>
         {
           string parentposition = item.Attribute(Immutables.CS_PARENT).Value;
-          XElement nd = CommonUtilities.GetActualNd(parentposition, item, resultXDoc) as XElement;
-          nd.AddAfterSelf(new XElement(Immutables.ADDITION, item.Descendants().ToList()));
+          XElement xNode = CommonUtilities.GetActualNd(parentposition, item, resultXDoc) as XElement;
+          xNode.AddAfterSelf(new XElement(Immutables.ADDITION, item.Descendants().ToList()));
           item.Add(new XAttribute(Immutables.PROCESSED, Immutables.TRUE));
         });
 
@@ -60,7 +60,7 @@ namespace Xml.Result.Processor
         item.Descendants(diffXDoc.Root.Name.Namespace + Immutables.ADD).ToList()
           .ForEach(s =>
           {
-            //single node or moved node
+            //single node or moved node///////////////////////////////////////////////
             if (s.Attribute(Immutables.TYPE) != null && s.Attribute(Immutables.TYPE).Value == Immutables.ONE && s.Attribute(Immutables.PROCESSED) == null && s.Attribute(Immutables.TYPE) != null)
             {
               if (xElement.Descendants().Elements() != null)
@@ -97,6 +97,27 @@ namespace Xml.Result.Processor
         nd.AddAfterSelf(new XElement(Immutables.ADDITION, xElement));
       }
       return resultXDoc;
+    }
+
+    private void AddMovedTextInformation(XElement xElement, XElement s)
+    {
+      if (xElement.Descendants().Elements() != null)
+      {
+        if (xElement.Elements().Count() > 0)
+          xElement.Elements().Last().Add(new XElement(s.Attribute(Immutables.NAME).Value), "");
+        else
+          xElement.Add(new XElement(s.Attribute(Immutables.NAME).Value), "");
+
+        s.Add(new XAttribute(Immutables.PROCESSED, Immutables.TRUE));
+      }
+      else
+      {
+        if (xElement.Elements().Count() > 0)
+          xElement.Elements().Last().Add(new XElement(s.Attribute(Immutables.NAME).Value), "");
+        else
+          xElement.Add(new XElement(s.Attribute(Immutables.NAME).Value), "");
+        s.Add(new XAttribute(Immutables.PROCESSED, Immutables.TRUE));
+      }
     }
   }
 }

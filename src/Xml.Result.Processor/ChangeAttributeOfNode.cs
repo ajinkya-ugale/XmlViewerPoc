@@ -25,10 +25,10 @@ namespace Xml.Result.Processor
               XElement valnode = null;
               if (nd.NodeType == XmlNodeType.Element)
                 valnode = (XElement)nd;
-              XNode requiredNd = valnode.Nodes().ToList()[Convert.ToInt32(nodeposiiton) - 1];
+              XNode requiredNode = valnode.Nodes().ToList()[Convert.ToInt32(nodeposiiton) - 1];
               XElement mainnode = null;
-              if (requiredNd.NodeType == XmlNodeType.Element)
-                mainnode = (XElement)requiredNd;
+              if (requiredNode.NodeType == XmlNodeType.Element)
+                mainnode = (XElement)requiredNode;
 
               mainnode.Add(new XAttribute(Immutables.OLDNAME, mainnode.Name));
               mainnode.Add(new XAttribute(Immutables.NEWNAME, item.Attribute(Immutables.NAME).Value));
